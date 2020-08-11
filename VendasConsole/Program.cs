@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace VendasConsole
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
             int selecao;
+
+            //Objeto de clientes
+            Cliente c = new Cliente(); 
+
+            //Lista de Objetos
+            List<Cliente> clientes = new List<Cliente>();
 
             do
             {
@@ -28,8 +37,20 @@ namespace VendasConsole
                 switch (selecao)
                 {
                     case 1:
+                        Console.WriteLine("----CADASTRAR CLIENTE----");
+                        Console.WriteLine("Digite o nome: ");
+                        c.Nome = Console.ReadLine();
+                        Console.WriteLine("Digite o CPF: ");
+                        c.cpf = Console.ReadLine();
+                        Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
+                        clientes.Add(c);
                         break;
                     case 2:
+                        Console.WriteLine("----LISTAGEM DE CLIENTES----");
+                        foreach (Cliente item in clientes)
+                        {
+                            Console.WriteLine($"Nome: {item.Nome} - CPF: {item.cpf}");
+                        }
                         break;
                     case 3:
                         break;
