@@ -42,14 +42,24 @@ namespace VendasConsole
                         c.Nome = Console.ReadLine();
                         Console.WriteLine("Digite o CPF: ");
                         c.cpf = Console.ReadLine();
-                        Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
-                        clientes.Add(c);
+
+                        int res = ExisteCpf(clientes, c.cpf);
+                        if(res == 0)
+                        {
+                            clientes.Add(c);
+                            Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
+                            c = new Cliente();
+                        } else
+                        {
+                            Console.WriteLine($"CPF {c.cpf} já cadastrado!");
+                        }                       
+                                                
                         break;
                     case 2:
                         Console.WriteLine("----LISTAGEM DE CLIENTES----");
                         foreach (Cliente item in clientes)
                         {
-                            Console.WriteLine($"Nome: {item.Nome} - CPF: {item.cpf}");
+                            Console.WriteLine($"Nome: {item.Nome} - CPF: {item.cpf} - Criado em: {item.Criadoem}");
                         }
                         break;
                     case 3:
@@ -81,22 +91,35 @@ namespace VendasConsole
            
 
 
+        }//fim main
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public static int ExisteCpf(List<Cliente> clientes, String cpf)
+        {
+                        
+            foreach (Cliente item in clientes)
+            {
+                if (cpf.Equals(item.cpf))
+                {
+                    return 1;
+                }
+            }
+            return 0;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }//fim classe
 }
