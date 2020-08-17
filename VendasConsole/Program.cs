@@ -42,18 +42,23 @@ namespace VendasConsole
                         c.Nome = Console.ReadLine();
                         Console.WriteLine("Digite o CPF: ");
                         c.cpf = Console.ReadLine();
-
+                                                
                         int res = ExisteCpf(clientes, c.cpf);
                         if(res == 0)
                         {
-                            clientes.Add(c);
-                            Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
-                            c = new Cliente();
+                            if (ValidaCpf(c.cpf))
+                            {
+                                clientes.Add(c);
+                                Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
+                                c = new Cliente();
+                            } else
+                            {
+                                Console.WriteLine($"CPF {c.cpf} Invalido!");
+                            }                                                        
                         } else
                         {
                             Console.WriteLine($"CPF {c.cpf} já cadastrado!");
-                        }                       
-                                                
+                        }                     
                         break;
                     case 2:
                         Console.WriteLine("----LISTAGEM DE CLIENTES----");
@@ -94,9 +99,12 @@ namespace VendasConsole
         }//fim main
 
 
+        /**
+         * Metodo recebe um List de clientes e verifica se o cpf informado já existe na lista
+         * Return 1 caso true e 0 caso false
+         */
         public static int ExisteCpf(List<Cliente> clientes, String cpf)
-        {
-                        
+        {                        
             foreach (Cliente item in clientes)
             {
                 if (cpf.Equals(item.cpf))
@@ -107,9 +115,70 @@ namespace VendasConsole
             return 0;
         }
 
+        /**
+         * Metodo que recebe um cpf e valida se eh valido
+         * 1o valida se o primeiro digito eh valido
+         * se sim, valida o 2o digito
+         * Return true (2 digitos validos) ou false (se um dos digitos for invalido)
+         */ 
+        public static Boolean ValidaCpf(String cpf)
+        {
+            Boolean digitos;
 
+            int soma1 = 0;
+            int count1 = 10;
+            for (int i = 0; i < cpf.Length - 2; i++)
+            {
+                int val = (int)Char.GetNumericValue(cpf[i]);
+                soma1 += (val * count1);
+                count1--;
+            }            
+                        
+            int resto1 = soma1 % 11;
+            if(resto1 < 2)
+            {
+                resto1 = 0;
+            } else
+            {
+                resto1 = 11 - resto1;
+            }
+                        
+            int convert1 = (int)Char.GetNumericValue(cpf[9]);
+            //se 1o digito ( resto1 ) eh valido entra no if para validar 2o digito
+            if(resto1 == convert1)
+            {
+                int soma2 = 0;
+                int count2 = 11;
+                for (int i = 0; i < cpf.Length - 1; i++)
+                {
+                    int val2 = (int)Char.GetNumericValue(cpf[i]);
+                    soma2 += (val2 * count2);
+                    count2--;
+                }
 
+                int resto2 = soma2 % 11;
+                if(resto2 < 2)
+                {
+                    resto2 = 0;
+                } else
+                {
+                    resto2 = 11 - resto2;                   
+                }
 
+                int convert2 = (int)Char.GetNumericValue(cpf[10]);
+                if(resto2 == convert2)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+
+            } else
+            {
+                return false;
+            }                 
+        }//fim metodo
 
 
 
