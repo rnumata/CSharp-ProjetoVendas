@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VendasConsole
+namespace VendasConsole.Views
 {
     class Program
     {
