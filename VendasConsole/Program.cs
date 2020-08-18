@@ -43,8 +43,7 @@ namespace VendasConsole
                         Console.WriteLine("Digite o CPF: ");
                         c.cpf = Console.ReadLine();
                                                 
-                        int res = ExisteCpf(clientes, c.cpf);
-                        if(res == 0)
+                        if(ExisteCpf(clientes, c.cpf))
                         {
                             if (ValidaCpf(c.cpf))
                             {
@@ -103,16 +102,17 @@ namespace VendasConsole
          * Metodo recebe um List de clientes e verifica se o cpf informado já existe na lista
          * Return 1 caso true e 0 caso false
          */
-        public static int ExisteCpf(List<Cliente> clientes, String cpf)
-        {                        
+        public static bool ExisteCpf(List<Cliente> clientes, String cpf)
+        {
+            cpf = cpf.Replace(".", "").Replace("-", "");
             foreach (Cliente item in clientes)
             {
                 if (cpf.Equals(item.cpf))
                 {
-                    return 1;
+                    return false;
                 }
             }
-            return 0;
+            return true;
         }
 
         /**
@@ -123,18 +123,17 @@ namespace VendasConsole
          */ 
         public static Boolean ValidaCpf(String cpf)
         {
-            Boolean digitos;
-
-            int soma1 = 0;
+           
+            int soma = 0;
             int count1 = 10;
             for (int i = 0; i < cpf.Length - 2; i++)
             {
                 int val = (int)Char.GetNumericValue(cpf[i]);
-                soma1 += (val * count1);
+                soma += (val * count1);
                 count1--;
             }            
                         
-            int resto1 = soma1 % 11;
+            int resto1 = soma % 11;
             if(resto1 < 2)
             {
                 resto1 = 0;
@@ -147,16 +146,16 @@ namespace VendasConsole
             //se 1o digito ( resto1 ) eh valido entra no if para validar 2o digito
             if(resto1 == convert1)
             {
-                int soma2 = 0;
+                soma = 0;
                 int count2 = 11;
                 for (int i = 0; i < cpf.Length - 1; i++)
                 {
                     int val2 = (int)Char.GetNumericValue(cpf[i]);
-                    soma2 += (val2 * count2);
+                    soma += (val2 * count2);
                     count2--;
                 }
 
-                int resto2 = soma2 % 11;
+                int resto2 = soma % 11;
                 if(resto2 < 2)
                 {
                     resto2 = 0;
