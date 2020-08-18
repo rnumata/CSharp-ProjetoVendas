@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using VendasConsole.Controller;
 
 namespace VendasConsole.Views
 {
@@ -11,8 +12,9 @@ namespace VendasConsole.Views
         {
             int selecao;
 
-            //Objeto de clientes
-            Cliente c = new Cliente(); 
+            //Instanciacao de Objetos
+            Cliente c = new Cliente();
+           
 
             //Lista de Objetos
             List<Cliente> clientes = new List<Cliente>();
@@ -43,9 +45,9 @@ namespace VendasConsole.Views
                         Console.WriteLine("Digite o CPF: ");
                         c.cpf = Console.ReadLine();
                                                 
-                        if(ExisteCpf(clientes, c.cpf))
+                        if(VerificarCpf.ExisteCpf(clientes, c.cpf))
                         {
-                            if (ValidaCpf(c.cpf))
+                            if (VerificarCpf.ValidaCpf(c.cpf))
                             {
                                 clientes.Add(c);
                                 Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
@@ -97,96 +99,7 @@ namespace VendasConsole.Views
 
         }//fim main
 
-
-        /**
-         * Metodo recebe um List de clientes e verifica se o cpf informado já existe na lista
-         * Return 1 caso true e 0 caso false
-         */
-        public static bool ExisteCpf(List<Cliente> clientes, String cpf)
-        {
-            cpf = cpf.Replace(".", "").Replace("-", "");
-            foreach (Cliente item in clientes)
-            {
-                if (cpf.Equals(item.cpf))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /**
-         * Metodo que recebe um cpf e valida se eh valido
-         * 1o valida se o primeiro digito eh valido
-         * se sim, valida o 2o digito
-         * Return true (2 digitos validos) ou false (se um dos digitos for invalido)
-         */ 
-        public static Boolean ValidaCpf(String cpf)
-        {
-           
-            int soma = 0;
-            int count1 = 10;
-            for (int i = 0; i < cpf.Length - 2; i++)
-            {
-                int val = (int)Char.GetNumericValue(cpf[i]);
-                soma += (val * count1);
-                count1--;
-            }            
-                        
-            int resto1 = soma % 11;
-            if(resto1 < 2)
-            {
-                resto1 = 0;
-            } else
-            {
-                resto1 = 11 - resto1;
-            }
-                        
-            int convert1 = (int)Char.GetNumericValue(cpf[9]);
-            //se 1o digito ( resto1 ) eh valido entra no if para validar 2o digito
-            if(resto1 == convert1)
-            {
-                soma = 0;
-                int count2 = 11;
-                for (int i = 0; i < cpf.Length - 1; i++)
-                {
-                    int val2 = (int)Char.GetNumericValue(cpf[i]);
-                    soma += (val2 * count2);
-                    count2--;
-                }
-
-                int resto2 = soma % 11;
-                if(resto2 < 2)
-                {
-                    resto2 = 0;
-                } else
-                {
-                    resto2 = 11 - resto2;                   
-                }
-
-                int convert2 = (int)Char.GetNumericValue(cpf[10]);
-                if(resto2 == convert2)
-                {
-                    return true;
-                } else
-                {
-                    return false;
-                }
-
-            } else
-            {
-                return false;
-            }                 
-        }//fim metodo
-
-
-
-
-
-
-
-
-
+                      
 
 
     }//fim classe
