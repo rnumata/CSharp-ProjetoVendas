@@ -44,22 +44,30 @@ namespace VendasConsole.Views
                         c.Nome = Console.ReadLine();
                         Console.WriteLine("Digite o CPF: ");
                         c.cpf = Console.ReadLine();
-                                                
-                        if(VerificarCpf.ExisteCpf(clientes, c.cpf))
+
+                        if (VerificarCpf.ValidaInput(c.cpf))
                         {
-                            if (VerificarCpf.ValidaCpf(c.cpf))
+                            if (VerificarCpf.ExisteCpf(clientes, c.cpf))
                             {
-                                clientes.Add(c);
-                                Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
-                                c = new Cliente();
-                            } else
+                                if (VerificarCpf.ValidaCpf(c.cpf))
+                                {
+                                    clientes.Add(c);
+                                    Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
+                                    c = new Cliente();
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"CPF {c.cpf} Invalido!");
+                                }
+                            }
+                            else
                             {
-                                Console.WriteLine($"CPF {c.cpf} Invalido!");
-                            }                                                        
+                                Console.WriteLine($"CPF {c.cpf} já cadastrado!");
+                            }
                         } else
                         {
-                            Console.WriteLine($"CPF {c.cpf} já cadastrado!");
-                        }                     
+                            Console.WriteLine($"CPF {c.cpf} Invalido!");
+                        }             
                         break;
                     case 2:
                         Console.WriteLine("----LISTAGEM DE CLIENTES----");

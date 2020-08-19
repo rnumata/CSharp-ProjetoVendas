@@ -7,8 +7,29 @@ namespace VendasConsole.Controller
     class VerificarCpf
     {
 
+        public static bool ValidaInput(String cpf)
+        {
+            cpf = cpf.Replace(".", "").Replace("-", "");
+            if(cpf.Length < 11 ||
+               cpf.Equals("11111111111") ||
+               cpf.Equals("22222222222") ||
+               cpf.Equals("33333333333") ||
+               cpf.Equals("44444444444") ||
+               cpf.Equals("55555555555") ||
+               cpf.Equals("66666666666") ||
+               cpf.Equals("77777777777") ||
+               cpf.Equals("88888888888") ||
+               cpf.Equals("99999999999") ||
+               cpf.Equals("00000000000")){
 
-        /**
+                return false;
+            }
+
+            return true;
+        }
+
+
+         /**
          * Metodo recebe um List de clientes e verifica se o cpf informado já existe na lista
          * Return 1 caso true e 0 caso false
          */
