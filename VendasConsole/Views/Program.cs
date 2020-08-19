@@ -14,10 +14,8 @@ namespace VendasConsole.Views
 
             //Instanciacao de Objetos
             Cliente c = new Cliente();
+            Vendedor v = new Vendedor();
            
-
-            //Lista de Objetos
-            List<Cliente> clientes = new List<Cliente>();
 
             do
             {
@@ -47,12 +45,13 @@ namespace VendasConsole.Views
 
                         if (VerificarCpf.ValidaInput(c.cpf))
                         {
-                            if (VerificarCpf.ExisteCpf(clientes, c.cpf))
+                            if (VerificarCpf.ExisteCpf(c.cpf, c.Tipo))
                             {
                                 if (VerificarCpf.ValidaCpf(c.cpf))
                                 {
-                                    clientes.Add(c);
-                                    Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} ");
+                                    VerificarCpf.clientes.Add(c); // !! Gravar no BD 
+
+                                    Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} Cadastrado com sucesso ! ");
                                     c = new Cliente();
                                 }
                                 else
@@ -71,14 +70,44 @@ namespace VendasConsole.Views
                         break;
                     case 2:
                         Console.WriteLine("----LISTAGEM DE CLIENTES----");
-                        foreach (Cliente item in clientes)
-                        {
-                            Console.WriteLine($"Nome: {item.Nome} - CPF: {item.cpf} - Criado em: {item.Criadoem}");
-                        }
+                        VerificarCpf.listarClientes();
                         break;
                     case 3:
+                        Console.WriteLine("----CADASTRAR VENDEDOR----");
+                        Console.WriteLine("Digite o nome: ");
+                        v.Nome = Console.ReadLine();
+                        Console.WriteLine("Digite o CPF: ");
+                        v.cpf = Console.ReadLine();
+
+                        if (VerificarCpf.ValidaInput(v.cpf))
+                        {
+                            if (VerificarCpf.ExisteCpf(v.cpf, v.Tipo))
+                            {
+                                if (VerificarCpf.ValidaCpf(v.cpf))
+                                {
+                                    VerificarCpf.vendedores.Add(v); // !! Gravar no BD 
+
+                                    Console.WriteLine($"Vendedor: {v.Nome} e CPF: {v.cpf} Cadastrado com sucesso ! ");
+                                    v = new Vendedor();
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"CPF {v.cpf} Invalido!");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine($"CPF {v.cpf} já cadastrado!");
+                            }
+
+                        } else
+                        {
+                            Console.WriteLine($"CPF {v.cpf} Invalido!");
+                        }
                         break;
                     case 4:
+                        Console.WriteLine($"----LISTAGEM DE VENDEDORES----");
+                        VerificarCpf.listarVendedores();
                         break;
                     case 5:
                         break;

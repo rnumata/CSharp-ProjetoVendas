@@ -7,6 +7,34 @@ namespace VendasConsole.Controller
     class VerificarCpf
     {
 
+        // Banco de Dados Cliente
+        public static List<Cliente> clientes = new List<Cliente>();
+
+        public static void listarClientes()
+        {
+            foreach (Cliente cliente in clientes)
+            {
+                Console.WriteLine($"Nome: {cliente.Nome} - CPF: {cliente.cpf} - Criado em: {cliente.Criadoem}");
+            }
+        }
+
+
+        // Banco de Dados Vendedor
+        public static List<Vendedor> vendedores = new List<Vendedor>();
+
+        public static void listarVendedores()
+        {
+            foreach (Vendedor vendedor in vendedores)
+            {
+                Console.WriteLine($"Nome: {vendedor.Nome} - CPF: {vendedor.cpf} - Criado em: {vendedor.Criadoem}");
+            }
+        }
+
+
+
+        /**
+         * Metodo que verifica se o input do usuario eh valido
+         */
         public static bool ValidaInput(String cpf)
         {
             cpf = cpf.Replace(".", "").Replace("-", "");
@@ -20,29 +48,43 @@ namespace VendasConsole.Controller
                cpf.Equals("77777777777") ||
                cpf.Equals("88888888888") ||
                cpf.Equals("99999999999") ||
-               cpf.Equals("00000000000")){
-
+               cpf.Equals("00000000000"))
+            {
                 return false;
             }
-
             return true;
         }
 
 
          /**
-         * Metodo recebe um List de clientes e verifica se o cpf informado já existe na lista
+         * Metodo verifica se o cpf informado já existe na lista
          * Return 1 caso true e 0 caso false
          */
-        public static bool ExisteCpf(List<Cliente> clientes, String cpf)
+        public static bool ExisteCpf(String cpf, String tipo)
         {
             cpf = cpf.Replace(".", "").Replace("-", "");
-            foreach (Cliente item in clientes)
+
+            if (tipo.Equals("cliente"))
             {
-                if (cpf.Equals(item.cpf))
+                foreach (Cliente item in clientes)
                 {
-                    return false;
+                    if (cpf.Equals(item.cpf))
+                    {
+                        return false;
+                    }
                 }
-            }
+                return true;
+
+            } else
+            {
+                foreach (Vendedor item in vendedores)
+                {
+                    if (cpf.Equals(item.cpf))
+                    {
+                        return false;
+                    }
+                }
+            }         
             return true;
         }
 

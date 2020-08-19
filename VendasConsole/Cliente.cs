@@ -11,13 +11,16 @@ namespace VendasConsole
 
         public string cpf { get; set; }
 
-        public DateTime Criadoem { get; set; }    
+        public DateTime Criadoem { get; set; }
+
+        public String Tipo { get; set; }
 
 
         //construtor (para criar com atalho ctor tabtab)
         public Cliente()
         {
             Criadoem = DateTime.Now;
+            Tipo = "cliente";
         }
 
 
