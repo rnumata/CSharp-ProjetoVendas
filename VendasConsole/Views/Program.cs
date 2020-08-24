@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using VendasConsole.Controller;
+using VendasConsole.Utils;
+using VendasConsole.Models;
 
 namespace VendasConsole.Views
 {
@@ -11,11 +12,6 @@ namespace VendasConsole.Views
         static void Main(string[] args)
         {
             int selecao;
-
-            //Instanciacao de Objetos
-            Cliente c = new Cliente();
-            Vendedor v = new Vendedor();
-           
 
             do
             {
@@ -37,77 +33,16 @@ namespace VendasConsole.Views
                 switch (selecao)
                 {
                     case 1:
-                        Console.WriteLine("----CADASTRAR CLIENTE----");
-                        Console.WriteLine("Digite o nome: ");
-                        c.Nome = Console.ReadLine();
-                        Console.WriteLine("Digite o CPF: ");
-                        c.cpf = Console.ReadLine();
-
-                        if (VerificarCpf.ValidaInput(c.cpf))
-                        {
-                            if (VerificarCpf.ExisteCpf(c.cpf, c.Tipo))
-                            {
-                                if (VerificarCpf.ValidaCpf(c.cpf))
-                                {
-                                    VerificarCpf.clientes.Add(c); // !! Gravar no BD 
-
-                                    Console.WriteLine($"Cliente: {c.Nome} e CPF: {c.cpf} Cadastrado com sucesso ! ");
-                                    c = new Cliente();
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"CPF {c.cpf} Invalido!");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine($"CPF {c.cpf} já cadastrado!");
-                            }
-                        } else
-                        {
-                            Console.WriteLine($"CPF {c.cpf} Invalido!");
-                        }             
+                        CadastrarCliente.Renderizar();      
                         break;
                     case 2:
-                        Console.WriteLine("----LISTAGEM DE CLIENTES----");
-                        VerificarCpf.listarClientes();
+                        ListarCliente.Renderizar();
                         break;
                     case 3:
-                        Console.WriteLine("----CADASTRAR VENDEDOR----");
-                        Console.WriteLine("Digite o nome: ");
-                        v.Nome = Console.ReadLine();
-                        Console.WriteLine("Digite o CPF: ");
-                        v.cpf = Console.ReadLine();
-
-                        if (VerificarCpf.ValidaInput(v.cpf))
-                        {
-                            if (VerificarCpf.ExisteCpf(v.cpf, v.Tipo))
-                            {
-                                if (VerificarCpf.ValidaCpf(v.cpf))
-                                {
-                                    VerificarCpf.vendedores.Add(v); // !! Gravar no BD 
-
-                                    Console.WriteLine($"Vendedor: {v.Nome} e CPF: {v.cpf} Cadastrado com sucesso ! ");
-                                    v = new Vendedor();
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"CPF {v.cpf} Invalido!");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine($"CPF {v.cpf} já cadastrado!");
-                            }
-
-                        } else
-                        {
-                            Console.WriteLine($"CPF {v.cpf} Invalido!");
-                        }
+                        CadastrarVendedor.Renderizar();
                         break;
                     case 4:
-                        Console.WriteLine($"----LISTAGEM DE VENDEDORES----");
-                        VerificarCpf.listarVendedores();
+                        ListarVendedor.Renderizar();
                         break;
                     case 5:
                         break;

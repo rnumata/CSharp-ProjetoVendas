@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VendasConsole
+namespace VendasConsole.Models
 {
     class Cliente
     {
@@ -13,14 +13,11 @@ namespace VendasConsole
 
         public DateTime Criadoem { get; set; }
 
-        public String Tipo { get; set; }
-
-
+       
         //construtor (para criar com atalho ctor tabtab)
         public Cliente()
         {
             Criadoem = DateTime.Now;
-            Tipo = "cliente";
         }
 
 
