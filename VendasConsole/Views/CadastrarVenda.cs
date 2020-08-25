@@ -42,6 +42,7 @@ namespace VendasConsole.Views
                         Console.WriteLine("Digite a quantidade: ");
                         venda.Quantidade = Convert.ToInt32(Console.ReadLine());
 
+                        VendaDAO.Cadastrar(venda);
                         Console.WriteLine("Venda realizada com sucesso!");
                         venda = new Venda();
                     } else

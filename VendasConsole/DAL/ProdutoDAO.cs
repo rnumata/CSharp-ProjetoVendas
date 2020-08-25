@@ -11,8 +11,6 @@ namespace VendasConsole.DAL
         //Banco de Dados Produto
         private static List<Produto> produtos = new List<Produto>();
 
-
-
         public static List<Produto> ListarProdutos() => produtos;
 
 
