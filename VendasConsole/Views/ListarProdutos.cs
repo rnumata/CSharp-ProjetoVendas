@@ -14,7 +14,7 @@ namespace VendasConsole.Views
             Console.WriteLine("----LISTAGEM DE PRODUTOS----");
             foreach (Produto p in ProdutoDAO.ListarProdutos())
             {
-                Console.WriteLine($"Produto: {p.Nome}\t | Preco: {p.Preco}\t | Saldo: {p.Saldo}");
+                Console.WriteLine($"Produto: {p.Nome}\t | Preco: {p.Preco:C2}\t | Saldo: {p.Saldo}");
             }
 
         }
