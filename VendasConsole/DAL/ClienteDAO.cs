@@ -25,18 +25,18 @@ namespace VendasConsole.DAL
         /// </summary>
         /// <param name="cpf"></param>
         /// <returns> true se existe e true se nao existe </returns>
-        public static bool ExisteCpf(String cpf)
+        public static Cliente ExisteCpf(String cpf)
         {
             cpf = cpf.Replace(".", "").Replace("-", "");
 
             foreach (Cliente c in clientes)
             {
-               if (cpf.Equals(c.cpf))
+               if (c.cpf == cpf)
                {
-                 return true;
+                 return c;
                }
             }
-               return false;
+               return null;
 
         }
 
@@ -48,13 +48,14 @@ namespace VendasConsole.DAL
         /// <returns> Se cadastro ok add na List e retorne true </returns>
         public static bool Cadastrar(Cliente c)
         {
-            if (ExisteCpf(c.cpf))
-            {
-                return false;
-            } else
+            if (ExisteCpf(c.cpf) == null)
             {
                 clientes.Add(c);
                 return true;
+                
+            } else
+            {
+                return false;
             }
         }
 

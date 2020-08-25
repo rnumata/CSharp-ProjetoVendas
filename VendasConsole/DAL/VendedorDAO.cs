@@ -25,7 +25,7 @@ namespace VendasConsole.DAL
         /// </summary>
         /// <param name="cpf"></param>
         /// <returns> true se existe e true se nao existe </returns>
-        public static bool ExisteCpf(String cpf)
+        public static Vendedor ExisteCpf(String cpf)
         {
             cpf = cpf.Replace(".", "").Replace("-", "");
 
@@ -33,10 +33,10 @@ namespace VendasConsole.DAL
             {
                 if (cpf.Equals(v.cpf))
                 {
-                    return true;
+                    return v;
                 }
             }
-            return false;
+            return null;
         }
 
 
@@ -47,13 +47,14 @@ namespace VendasConsole.DAL
         /// <returns> Se cadastro ok add na List e retorne true </returns>
         public static bool Cadastrar(Vendedor v)
         {
-            if (ExisteCpf(v.cpf))
-            {
-                return false;
-            } else
+            if (ExisteCpf(v.cpf) == null)
             {
                 vendedores.Add(v);
                 return true;
+            } 
+            else
+            {
+                return false;
             }
                         
         }

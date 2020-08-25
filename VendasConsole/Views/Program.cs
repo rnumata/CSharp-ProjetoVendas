@@ -45,10 +45,13 @@ namespace VendasConsole.Views
                         ListarVendedor.Renderizar();
                         break;
                     case 5:
+                        CadastrarProduto.Renderizar();
                         break;
                     case 6:
+                        ListarProdutos.Renderizar();
                         break;
                     case 7:
+                        CadastrarVenda.Renderizar();
                         break;
                     case 8:
                         break;
