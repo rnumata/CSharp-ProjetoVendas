@@ -18,12 +18,15 @@ namespace VendasConsole.Views
             cpf = Console.ReadLine();
 
             Console.WriteLine("\n----LISTAGEM DE ITENS----");
-            foreach (Venda venda in VendaDAO.ListarVendasCliente(cpf))
+            foreach (Venda venda in VendaDAO.ListarVendas())
             {
-                venda.itens.ForEach((item) =>
+                if (venda.cliente.cpf.Equals(cpf))
                 {
-                    Console.WriteLine($"Item: {item.Produto.Nome}\tQuantidade: {item.Quantidade}");
-                });
+                    venda.itens.ForEach((item) =>
+                    {
+                        Console.WriteLine($"Item: {item.Produto.Nome}\tQuantidade: {item.Quantidade}");
+                    });
+                }
             }
 
         }
