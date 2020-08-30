@@ -57,6 +57,7 @@ namespace VendasConsole.Views
                         ListarVendas.Renderizar();
                         break;
                     case 9:
+                        ListarVendasCliente.Renderizar();
                         break;
                     case 0:
                         break;

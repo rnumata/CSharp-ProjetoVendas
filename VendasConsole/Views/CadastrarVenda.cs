@@ -29,26 +29,25 @@ namespace VendasConsole.Views
                 v.cpf = Console.ReadLine();
                 v = VendedorDAO.ExisteCpf(v.cpf);
 
+
                 if(v != null)
                 {
                     venda.vendedor = v;
-                    Console.WriteLine("Digite o Produto: ");
-                    p.Nome = Console.ReadLine();
-                    p = ProdutoDAO.ExisteProduto(p.Nome);
-                    
-                    if(p != null)
-                    {
-                        venda.Produto = p;
-                        Console.WriteLine("Digite a quantidade: ");
-                        venda.Quantidade = Convert.ToInt32(Console.ReadLine());
 
+
+                    List<Carrinho> itens = CadastrarCarrinho.InserirItens();
+                    if ( itens != null)
+                    {
+                        venda.itens = itens;
                         VendaDAO.Cadastrar(venda);
                         Console.WriteLine("Venda realizada com sucesso!");
                         venda = new Venda();
-                    } else
-                    {
-                        Console.WriteLine("Produto NAO cadastrado!");
                     }
+                    else
+                    {
+                        Console.WriteLine("Venda NAO cadastrada!");
+                    }
+
 
                 } else
                 {

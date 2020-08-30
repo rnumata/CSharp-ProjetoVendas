@@ -42,5 +42,19 @@ namespace VendasConsole.DAL
 
 
 
+        public static void AtualizarSaldo(String nome, int quantidade)
+        {
+            foreach (Produto p in produtos)
+            {
+                if (p.Nome.Equals(nome))
+                {
+                    p.Saldo = p.Saldo - quantidade;
+                }
+            }
+        }
+
+
+
+
     }
 }
