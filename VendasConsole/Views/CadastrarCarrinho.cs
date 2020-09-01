@@ -15,8 +15,7 @@ namespace VendasConsole.Views
 
             Carrinho cc = new Carrinho();
             Produto p = new Produto();
-            string opcao = "S";
-            string cadastrar = "S";
+            
 
             do
             {
@@ -47,14 +46,14 @@ namespace VendasConsole.Views
                 }
 
                 Console.WriteLine("\nDeseja Continuar comprando? S/N");
-                opcao = Console.ReadLine();
+                
 
-            } while (opcao != "N");
+            } while (Console.ReadLine().ToUpper().Equals("S"));
 
 
             Console.WriteLine("Deseja Cadastrar a compra? S/N");
-            cadastrar = Console.ReadLine();
-            if(cadastrar == "S")
+            
+            if (Console.ReadLine().ToUpper().Equals("S"))
             {
                 return ItensCarrinho;
             }
