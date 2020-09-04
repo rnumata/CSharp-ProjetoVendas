@@ -5,13 +5,13 @@ Sales console app
 ### __Description__
 
 It is an application developed attending the C# discipline at university Positivo </br>
-It is based according to the customer requirement (doc attached)
+It is based according to the customer requirement (doc attached)</br>
 The main aim is to run a CRUD rotine 
 
 ### __Technologies Used__
 
-IDE MS Visual Studio - Community 2019
-C#</br>
+IDE MS Visual Studio - Community 2019</br>
+C#
 
 ### __Learnings__
 
